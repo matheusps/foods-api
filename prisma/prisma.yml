@@ -1,0 +1,12 @@
+#endpoint: ''
+endpoint: https://us1.prisma.sh/matheus-p-silva-14e241/foods-api/dev
+
+datamodel: datamodel.prisma
+
+generate:
+  - generator: javascript-client
+    output: ./prisma-client
+
+hooks:
+  post-deploy:
+    - prisma generate

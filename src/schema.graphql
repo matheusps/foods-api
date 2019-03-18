@@ -1,0 +1,14 @@
+type Query {
+  status: String!
+  foods: [Food!]!
+}
+
+type Mutation {
+  createFood(name: String!): Food!
+  deleteFood(id: ID!): Food!
+}
+
+type Food {
+  id: ID!
+  name: String!
+}
