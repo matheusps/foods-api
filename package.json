@@ -8,15 +8,34 @@
     "start": "ts-node src/index.ts",
     "build": "tsc",
     "prod": "npm run build && node dist/index.js",
-    "dev": "nodemon --watch \"src\" --exec \"ts-node src/index.ts\" -e ts"
+    "dev": "nodemon --watch \"src\" --exec \"ts-node src/index.ts\" -e ts",
+    "test": "jest --no-cache",
+    "test:coverage": "jest --collectCoverage"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.5.0",
     "nodemon": "^1.18.10",
+    "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.3333"
   },
   "dependencies": {
     "graphql-yoga": "^1.17.1",
     "prisma-client-lib": "^1.25.6"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }
