@@ -10,7 +10,8 @@
     "prod": "npm run build && node dist/index.js",
     "dev": "nodemon --watch \"src\" --exec \"ts-node src/index.ts\" -e ts",
     "test": "jest --no-cache",
-    "test:coverage": "jest --collectCoverage"
+    "test:coverage": "jest --collectCoverage",
+    "codecov": "yarn test:coverage && codecov -f coverage/*.json"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
