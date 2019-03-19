@@ -1,6 +1,7 @@
 # 🍦Foods
 
 [![CircleCI](https://circleci.com/gh/matheusps/foods-api.svg?style=svg)](https://circleci.com/gh/matheusps/foods-api)
+[![codecov](https://codecov.io/gh/matheusps/foods-api/branch/master/graph/badge.svg)](https://codecov.io/gh/matheusps/foods-api)
 
 ### Starting
 
