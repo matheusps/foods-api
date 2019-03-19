@@ -1,5 +1,7 @@
 # 🍦Foods
 
+[![CircleCI](https://circleci.com/gh/matheusps/foods-api.svg?style=svg)](https://circleci.com/gh/matheusps/foods-api)
+
 ### Starting
 
 `npm start`
