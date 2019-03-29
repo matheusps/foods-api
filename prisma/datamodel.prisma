@@ -2,3 +2,17 @@ type Food {
   id: ID! @unique
   name: String!
 }
+
+type Space {
+  id: ID! @unique
+  name: String!
+  storeAs: StorageMethod!
+  foods: [Food!]!
+  icon: String
+}
+
+enum StorageMethod {
+  FROZEN
+  COLD
+  NATURAL
+}

@@ -1,11 +1,27 @@
 type Query {
   status: String!
+  spaces: [Space!]!
   foods: [Food!]!
 }
 
 type Mutation {
+  createSpace(name: String!, storeAs: StorageMethod!, icon: String): Space!
   createFood(name: String!): Food!
   deleteFood(id: ID!): Food!
+}
+
+type Space {
+  id: ID!
+  name: String!
+  storeAs: StorageMethod!
+  foods: [Food!]!
+  icon: String
+}
+
+enum StorageMethod {
+  FROZEN
+  COLD
+  NATURAL
 }
 
 type Food {

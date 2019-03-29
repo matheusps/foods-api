@@ -3,10 +3,12 @@ import { prisma } from '../prisma/prisma-client'
 
 import * as Query from './resolvers/Query'
 import * as Mutation from './resolvers/Mutation'
+import * as Space from './resolvers/Space'
 
 const resolvers = {
   Query,
   Mutation,
+  Space,
 }
 
 const server = new GraphQLServer({
