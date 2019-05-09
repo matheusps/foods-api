@@ -10,6 +10,18 @@ export const deleteSpace = (root, args, context) =>
     id: args.id,
   })
 
+export const editSpace = (root, args, context) =>
+  context.prisma.updateSpace({
+    data: {
+      name: args.name,
+      storeAs: args.storeAs,
+      icon: args.icon,
+    },
+    where: {
+      id: args.id,
+    },
+  })
+
 export const createFood = (root, args, context) =>
   context.prisma.createFood({
     name: args.name,

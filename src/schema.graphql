@@ -6,6 +6,7 @@ type Query {
 
 type Mutation {
   createSpace(name: String!, storeAs: StorageMethod!, icon: String): Space!
+  editSpace(id: ID, name: String, storeAs: StorageMethod, icon: String): Space!
   deleteSpace(id: ID!): Space!
   createFood(name: String!): Food!
   deleteFood(id: ID!): Food!
