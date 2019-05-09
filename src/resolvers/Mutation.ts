@@ -5,6 +5,11 @@ export const createSpace = (root, args, context) =>
     icon: args.icon,
   })
 
+export const deleteSpace = (root, args, context) =>
+  context.prisma.deleteSpace({
+    id: args.id,
+  })
+
 export const createFood = (root, args, context) =>
   context.prisma.createFood({
     name: args.name,
