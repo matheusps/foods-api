@@ -22,6 +22,22 @@ export const editSpace = (root, args, context) =>
     },
   })
 
+export const addFoodInSpace = (root, args, context) =>
+  context.prisma.updateSpace({
+    data: {
+      foods: {
+        connect: [
+          {
+            id: args.foodID,
+          },
+        ],
+      },
+    },
+    where: {
+      id: args.id,
+    },
+  })
+
 export const createFood = (root, args, context) =>
   context.prisma.createFood({
     name: args.name,

@@ -10,6 +10,7 @@ type Mutation {
   deleteSpace(id: ID!): Space!
   createFood(name: String!): Food!
   deleteFood(id: ID!): Food!
+  addFoodInSpace(id: ID, foodID: ID): Space!
 }
 
 type Space {
