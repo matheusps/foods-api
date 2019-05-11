@@ -26,11 +26,14 @@ export const addFoodInSpace = (root, args, context) =>
   context.prisma.updateSpace({
     data: {
       foods: {
-        connect: [
-          {
-            id: args.foodID,
+        create: {
+          validThru: args.validThru,
+          food: {
+            connect: {
+              id: args.foodID,
+            },
           },
-        ],
+        },
       },
     },
     where: {
