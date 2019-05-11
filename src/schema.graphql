@@ -10,14 +10,14 @@ type Mutation {
   deleteSpace(id: ID!): Space!
   createFood(name: String!): Food!
   deleteFood(id: ID!): Food!
-  addFoodInSpace(id: ID, foodID: ID): Space!
+  addFoodInSpace(id: ID, validThru: String!, foodID: ID): Space!
 }
 
 type Space {
   id: ID!
   name: String!
   storeAs: StorageMethod!
-  foods: [Food!]!
+  foods: [StoredFood!]!
   icon: String
 }
 
@@ -25,6 +25,12 @@ enum StorageMethod {
   FROZEN
   COLD
   NATURAL
+}
+
+type StoredFood {
+  id: ID!
+  food: Food!
+  validThru: String!
 }
 
 type Food {

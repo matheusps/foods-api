@@ -1,14 +1,24 @@
 type Food {
-  id: ID! @unique
+  id: ID! @unique @id
   name: String!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type StoredFood {
+  id: ID! @unique @id
+  food: Food!
+  validThru: String!
 }
 
 type Space {
-  id: ID! @unique
+  id: ID! @unique @id
   name: String!
   storeAs: StorageMethod!
-  foods: [Food!]!
+  foods: [StoredFood!]!
   icon: String
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
 
 enum StorageMethod {
