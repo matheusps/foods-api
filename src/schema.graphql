@@ -13,6 +13,7 @@ type Mutation {
   deleteFood(id: ID!): Food!
   addFoodInSpace(id: ID, validThru: String!, foodID: ID): Space!
   createRecipe(name: String!, ingredients: [IngredientInput]): Recipe!
+  deleteRecipe(id: ID!): Recipe!
 }
 
 type Space {

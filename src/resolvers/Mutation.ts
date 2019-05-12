@@ -5,10 +5,12 @@ export const createSpace = (root, args, context) =>
     icon: args.icon,
   })
 
-export const deleteSpace = (root, args, context) =>
-  context.prisma.deleteSpace({
+export const deleteSpace = async (root, args, context) => {
+  const deletedSpace = await context.prisma.deleteSpace({
     id: args.id,
   })
+  return deletedSpace
+}
 
 export const editSpace = (root, args, context) =>
   context.prisma.updateSpace({
@@ -70,3 +72,10 @@ export const createRecipe = (root, args, context) =>
       ],
     },
   })
+
+export const deleteRecipe = async (root, args, context) => {
+  const deletedFood = await context.prisma.deleteRecipe({
+    id: args.id,
+  })
+  return deletedFood
+}
