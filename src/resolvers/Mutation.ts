@@ -52,3 +52,21 @@ export const deleteFood = async (root, args, context) => {
   })
   return deletedFood
 }
+
+export const createRecipe = (root, args, context) =>
+  context.prisma.createRecipe({
+    name: args.name,
+    ingredients: {
+      create: [
+        ...args.ingredients.map(ing => ({
+          amount: ing.amount,
+          measure: ing.measure,
+          food: {
+            connect: {
+              id: ing.foodID,
+            },
+          },
+        })),
+      ],
+    },
+  })
