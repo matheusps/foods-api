@@ -5,6 +5,21 @@ type Food {
   createdAt: DateTime! @createdAt
 }
 
+type Ingredient {
+  id: ID! @unique @id
+  amount: Int
+  measure: Measure!
+  food: Food!
+}
+
+type Recipe {
+  id: ID! @unique @id
+  name: String!
+  ingredients: [Ingredient!]!
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
 type StoredFood {
   id: ID! @unique @id
   food: Food!
@@ -25,4 +40,9 @@ enum StorageMethod {
   FROZEN
   COLD
   NATURAL
+}
+
+enum Measure {
+  ML
+  GRAM
 }

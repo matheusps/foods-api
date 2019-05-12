@@ -2,6 +2,7 @@ type Query {
   status: String!
   spaces: [Space!]!
   foods: [Food!]!
+  recipes: [Recipe!]!
 }
 
 type Mutation {
@@ -36,4 +37,22 @@ type StoredFood {
 type Food {
   id: ID!
   name: String!
+}
+
+enum Measure {
+  ML
+  GRAM
+}
+
+type Ingredient {
+  id: ID!
+  amount: Int
+  measure: Measure!
+  food: Food!
+}
+
+type Recipe {
+  id: ID!
+  name: String!
+  ingredients: [Ingredient!]!
 }

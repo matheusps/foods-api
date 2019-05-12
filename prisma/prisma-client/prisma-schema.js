@@ -7,6 +7,14 @@ module.exports = {
   count: Int!
 }
 
+type AggregateIngredient {
+  count: Int!
+}
+
+type AggregateRecipe {
+  count: Int!
+}
+
 type AggregateSpace {
   count: Int!
 }
@@ -163,7 +171,194 @@ input FoodWhereUniqueInput {
   id: ID
 }
 
+type Ingredient {
+  id: ID!
+  amount: Int
+  measure: Measure!
+  food: Food!
+}
+
+type IngredientConnection {
+  pageInfo: PageInfo!
+  edges: [IngredientEdge]!
+  aggregate: AggregateIngredient!
+}
+
+input IngredientCreateInput {
+  id: ID
+  amount: Int
+  measure: Measure!
+  food: FoodCreateOneInput!
+}
+
+input IngredientCreateManyInput {
+  create: [IngredientCreateInput!]
+  connect: [IngredientWhereUniqueInput!]
+}
+
+type IngredientEdge {
+  node: Ingredient!
+  cursor: String!
+}
+
+enum IngredientOrderByInput {
+  id_ASC
+  id_DESC
+  amount_ASC
+  amount_DESC
+  measure_ASC
+  measure_DESC
+}
+
+type IngredientPreviousValues {
+  id: ID!
+  amount: Int
+  measure: Measure!
+}
+
+input IngredientScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  amount: Int
+  amount_not: Int
+  amount_in: [Int!]
+  amount_not_in: [Int!]
+  amount_lt: Int
+  amount_lte: Int
+  amount_gt: Int
+  amount_gte: Int
+  measure: Measure
+  measure_not: Measure
+  measure_in: [Measure!]
+  measure_not_in: [Measure!]
+  AND: [IngredientScalarWhereInput!]
+  OR: [IngredientScalarWhereInput!]
+  NOT: [IngredientScalarWhereInput!]
+}
+
+type IngredientSubscriptionPayload {
+  mutation: MutationType!
+  node: Ingredient
+  updatedFields: [String!]
+  previousValues: IngredientPreviousValues
+}
+
+input IngredientSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: IngredientWhereInput
+  AND: [IngredientSubscriptionWhereInput!]
+  OR: [IngredientSubscriptionWhereInput!]
+  NOT: [IngredientSubscriptionWhereInput!]
+}
+
+input IngredientUpdateDataInput {
+  amount: Int
+  measure: Measure
+  food: FoodUpdateOneRequiredInput
+}
+
+input IngredientUpdateInput {
+  amount: Int
+  measure: Measure
+  food: FoodUpdateOneRequiredInput
+}
+
+input IngredientUpdateManyDataInput {
+  amount: Int
+  measure: Measure
+}
+
+input IngredientUpdateManyInput {
+  create: [IngredientCreateInput!]
+  update: [IngredientUpdateWithWhereUniqueNestedInput!]
+  upsert: [IngredientUpsertWithWhereUniqueNestedInput!]
+  delete: [IngredientWhereUniqueInput!]
+  connect: [IngredientWhereUniqueInput!]
+  set: [IngredientWhereUniqueInput!]
+  disconnect: [IngredientWhereUniqueInput!]
+  deleteMany: [IngredientScalarWhereInput!]
+  updateMany: [IngredientUpdateManyWithWhereNestedInput!]
+}
+
+input IngredientUpdateManyMutationInput {
+  amount: Int
+  measure: Measure
+}
+
+input IngredientUpdateManyWithWhereNestedInput {
+  where: IngredientScalarWhereInput!
+  data: IngredientUpdateManyDataInput!
+}
+
+input IngredientUpdateWithWhereUniqueNestedInput {
+  where: IngredientWhereUniqueInput!
+  data: IngredientUpdateDataInput!
+}
+
+input IngredientUpsertWithWhereUniqueNestedInput {
+  where: IngredientWhereUniqueInput!
+  update: IngredientUpdateDataInput!
+  create: IngredientCreateInput!
+}
+
+input IngredientWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  amount: Int
+  amount_not: Int
+  amount_in: [Int!]
+  amount_not_in: [Int!]
+  amount_lt: Int
+  amount_lte: Int
+  amount_gt: Int
+  amount_gte: Int
+  measure: Measure
+  measure_not: Measure
+  measure_in: [Measure!]
+  measure_not_in: [Measure!]
+  food: FoodWhereInput
+  AND: [IngredientWhereInput!]
+  OR: [IngredientWhereInput!]
+  NOT: [IngredientWhereInput!]
+}
+
+input IngredientWhereUniqueInput {
+  id: ID
+}
+
 scalar Long
+
+enum Measure {
+  ML
+  GRAM
+}
 
 type Mutation {
   createFood(data: FoodCreateInput!): Food!
@@ -172,6 +367,18 @@ type Mutation {
   upsertFood(where: FoodWhereUniqueInput!, create: FoodCreateInput!, update: FoodUpdateInput!): Food!
   deleteFood(where: FoodWhereUniqueInput!): Food
   deleteManyFoods(where: FoodWhereInput): BatchPayload!
+  createIngredient(data: IngredientCreateInput!): Ingredient!
+  updateIngredient(data: IngredientUpdateInput!, where: IngredientWhereUniqueInput!): Ingredient
+  updateManyIngredients(data: IngredientUpdateManyMutationInput!, where: IngredientWhereInput): BatchPayload!
+  upsertIngredient(where: IngredientWhereUniqueInput!, create: IngredientCreateInput!, update: IngredientUpdateInput!): Ingredient!
+  deleteIngredient(where: IngredientWhereUniqueInput!): Ingredient
+  deleteManyIngredients(where: IngredientWhereInput): BatchPayload!
+  createRecipe(data: RecipeCreateInput!): Recipe!
+  updateRecipe(data: RecipeUpdateInput!, where: RecipeWhereUniqueInput!): Recipe
+  updateManyRecipes(data: RecipeUpdateManyMutationInput!, where: RecipeWhereInput): BatchPayload!
+  upsertRecipe(where: RecipeWhereUniqueInput!, create: RecipeCreateInput!, update: RecipeUpdateInput!): Recipe!
+  deleteRecipe(where: RecipeWhereUniqueInput!): Recipe
+  deleteManyRecipes(where: RecipeWhereInput): BatchPayload!
   createSpace(data: SpaceCreateInput!): Space!
   updateSpace(data: SpaceUpdateInput!, where: SpaceWhereUniqueInput!): Space
   updateManySpaces(data: SpaceUpdateManyMutationInput!, where: SpaceWhereInput): BatchPayload!
@@ -207,6 +414,12 @@ type Query {
   food(where: FoodWhereUniqueInput!): Food
   foods(where: FoodWhereInput, orderBy: FoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Food]!
   foodsConnection(where: FoodWhereInput, orderBy: FoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FoodConnection!
+  ingredient(where: IngredientWhereUniqueInput!): Ingredient
+  ingredients(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ingredient]!
+  ingredientsConnection(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IngredientConnection!
+  recipe(where: RecipeWhereUniqueInput!): Recipe
+  recipes(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Recipe]!
+  recipesConnection(where: RecipeWhereInput, orderBy: RecipeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RecipeConnection!
   space(where: SpaceWhereUniqueInput!): Space
   spaces(where: SpaceWhereInput, orderBy: SpaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Space]!
   spacesConnection(where: SpaceWhereInput, orderBy: SpaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SpaceConnection!
@@ -214,6 +427,133 @@ type Query {
   storedFoods(where: StoredFoodWhereInput, orderBy: StoredFoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StoredFood]!
   storedFoodsConnection(where: StoredFoodWhereInput, orderBy: StoredFoodOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoredFoodConnection!
   node(id: ID!): Node
+}
+
+type Recipe {
+  id: ID!
+  name: String!
+  ingredients(where: IngredientWhereInput, orderBy: IngredientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Ingredient!]
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type RecipeConnection {
+  pageInfo: PageInfo!
+  edges: [RecipeEdge]!
+  aggregate: AggregateRecipe!
+}
+
+input RecipeCreateInput {
+  id: ID
+  name: String!
+  ingredients: IngredientCreateManyInput
+}
+
+type RecipeEdge {
+  node: Recipe!
+  cursor: String!
+}
+
+enum RecipeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type RecipePreviousValues {
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type RecipeSubscriptionPayload {
+  mutation: MutationType!
+  node: Recipe
+  updatedFields: [String!]
+  previousValues: RecipePreviousValues
+}
+
+input RecipeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: RecipeWhereInput
+  AND: [RecipeSubscriptionWhereInput!]
+  OR: [RecipeSubscriptionWhereInput!]
+  NOT: [RecipeSubscriptionWhereInput!]
+}
+
+input RecipeUpdateInput {
+  name: String
+  ingredients: IngredientUpdateManyInput
+}
+
+input RecipeUpdateManyMutationInput {
+  name: String
+}
+
+input RecipeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  ingredients_every: IngredientWhereInput
+  ingredients_some: IngredientWhereInput
+  ingredients_none: IngredientWhereInput
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [RecipeWhereInput!]
+  OR: [RecipeWhereInput!]
+  NOT: [RecipeWhereInput!]
+}
+
+input RecipeWhereUniqueInput {
+  id: ID
 }
 
 type Space {
@@ -560,6 +900,8 @@ input StoredFoodWhereUniqueInput {
 
 type Subscription {
   food(where: FoodSubscriptionWhereInput): FoodSubscriptionPayload
+  ingredient(where: IngredientSubscriptionWhereInput): IngredientSubscriptionPayload
+  recipe(where: RecipeSubscriptionWhereInput): RecipeSubscriptionPayload
   space(where: SpaceSubscriptionWhereInput): SpaceSubscriptionPayload
   storedFood(where: StoredFoodSubscriptionWhereInput): StoredFoodSubscriptionPayload
 }
