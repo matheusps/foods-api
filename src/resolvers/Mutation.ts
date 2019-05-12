@@ -79,3 +79,13 @@ export const deleteRecipe = async (root, args, context) => {
   })
   return deletedFood
 }
+
+export const editRecipe = (root, args, context) =>
+  context.prisma.updateRecipe({
+    data: {
+      name: args.name,
+    },
+    where: {
+      id: args.id,
+    },
+  })
