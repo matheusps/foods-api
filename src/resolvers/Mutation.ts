@@ -89,3 +89,25 @@ export const editRecipe = (root, args, context) =>
       id: args.id,
     },
   })
+
+export const addIngredientsToRecipe = (root, args, context) =>
+  context.prisma.updateRecipe({
+    data: {
+      ingredients: {
+        create: [
+          ...args.ingredients.map(ing => ({
+            amount: ing.amount,
+            measure: ing.measure,
+            food: {
+              connect: {
+                id: ing.foodID,
+              },
+            },
+          })),
+        ],
+      },
+    },
+    where: {
+      id: args.id,
+    },
+  })
