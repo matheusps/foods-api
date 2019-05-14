@@ -2,6 +2,7 @@ type Query {
   status: String!
   spaces: [Space!]!
   foods: [Food!]!
+  recipes: [Recipe!]!
 }
 
 type Mutation {
@@ -11,6 +12,11 @@ type Mutation {
   createFood(name: String!): Food!
   deleteFood(id: ID!): Food!
   addFoodInSpace(id: ID, validThru: String!, foodID: ID): Space!
+  createRecipe(name: String!, ingredients: [IngredientInput]): Recipe!
+  deleteRecipe(id: ID!): Recipe!
+  editRecipe(id: ID, name: String): Recipe!
+  addIngredientsToRecipe(id: ID, ingredients: [IngredientInput]): Recipe!
+  removeIngredientFromRecipe(id: ID, ingredientID: ID): Recipe!
 }
 
 type Space {
@@ -36,4 +42,28 @@ type StoredFood {
 type Food {
   id: ID!
   name: String!
+}
+
+enum Measure {
+  ML
+  GRAM
+}
+
+type Ingredient {
+  id: ID!
+  amount: Int
+  measure: Measure!
+  food: Food!
+}
+
+input IngredientInput {
+  amount: Int!
+  measure: Measure!
+  foodID: ID!
+}
+
+type Recipe {
+  id: ID!
+  name: String!
+  ingredients: [Ingredient!]!
 }

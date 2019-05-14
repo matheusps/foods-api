@@ -9,6 +9,14 @@ var models = [
     embedded: false
   },
   {
+    name: "Ingredient",
+    embedded: false
+  },
+  {
+    name: "Recipe",
+    embedded: false
+  },
+  {
     name: "StoredFood",
     embedded: false
   },
@@ -18,6 +26,10 @@ var models = [
   },
   {
     name: "StorageMethod",
+    embedded: false
+  },
+  {
+    name: "Measure",
     embedded: false
   }
 ];

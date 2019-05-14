@@ -5,12 +5,16 @@ import * as Query from './resolvers/Query'
 import * as Mutation from './resolvers/Mutation'
 import * as Space from './resolvers/Space'
 import * as StoredFood from './resolvers/StoredFood'
+import * as Recipe from './resolvers/Recipe'
+import * as Ingredient from './resolvers/Ingredient'
 
 const resolvers = {
   Query,
   Mutation,
   Space,
   StoredFood,
+  Recipe,
+  Ingredient,
 }
 
 const server = new GraphQLServer({
