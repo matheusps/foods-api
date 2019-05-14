@@ -111,3 +111,15 @@ export const addIngredientsToRecipe = (root, args, context) =>
       id: args.id,
     },
   })
+
+export const removeIngredientFromRecipe = (root, args, context) =>
+  context.prisma.updateRecipe({
+    data: {
+      ingredients: {
+        delete: { id: args.ingredientID },
+      },
+    },
+    where: {
+      id: args.id,
+    },
+  })

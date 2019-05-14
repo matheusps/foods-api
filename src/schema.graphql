@@ -16,6 +16,7 @@ type Mutation {
   deleteRecipe(id: ID!): Recipe!
   editRecipe(id: ID, name: String): Recipe!
   addIngredientsToRecipe(id: ID, ingredients: [IngredientInput]): Recipe!
+  removeIngredientFromRecipe(id: ID, ingredientID: ID): Recipe!
 }
 
 type Space {
