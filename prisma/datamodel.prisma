@@ -1,8 +1,16 @@
 type Food {
   id: ID! @unique @id
   name: String!
+  barCode: String
+  validEstimates: [ValidEstimate!]
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
+}
+
+type ValidEstimate {
+  id: ID! @id
+  method: StorageMethod!
+  estimate: Int! #in days
 }
 
 type Ingredient {

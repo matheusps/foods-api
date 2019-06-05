@@ -9,7 +9,11 @@ type Mutation {
   createSpace(name: String!, storeAs: StorageMethod!, icon: String): Space!
   editSpace(id: ID, name: String, storeAs: StorageMethod, icon: String): Space!
   deleteSpace(id: ID!): Space!
-  createFood(name: String!): Food!
+  createFood(
+    name: String!
+    barCode: String
+    validEstimates: [ValidEstimateInput]
+  ): Food!
   deleteFood(id: ID!): Food!
   addFoodInSpace(id: ID, validThru: String!, foodID: ID): Space!
   createRecipe(name: String!, ingredients: [IngredientInput]): Recipe!
@@ -36,12 +40,26 @@ enum StorageMethod {
 type StoredFood {
   id: ID!
   food: Food!
-  validThru: String!
+  validThru: String! #date
 }
 
 type Food {
   id: ID!
   name: String!
+  #packed foods
+  barCode: String
+  #unpacked foods
+  validEstimates: [ValidEstimate!]
+}
+
+input ValidEstimateInput {
+  method: StorageMethod!
+  estimate: Int! #date
+}
+
+type ValidEstimate {
+  method: StorageMethod!
+  estimate: Int! #date
 }
 
 enum Measure {
