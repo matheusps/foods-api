@@ -9,6 +9,10 @@ var models = [
     embedded: false
   },
   {
+    name: "ValidEstimate",
+    embedded: false
+  },
+  {
     name: "Ingredient",
     embedded: false
   },
